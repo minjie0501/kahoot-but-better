@@ -1,12 +1,14 @@
 import * as React from "react";
 
-interface Props {}
+interface Props {
+  homeClick: () => void;
+}
 
-const Navbar: React.FunctionComponent<Props> = () => {
+const Navbar: React.FunctionComponent<Props> = ({homeClick}) => {
   return (
     <nav className="border-gray-200 px-2 sm:px-4 py-2.5 bg-gray-400">
       <div className="container flex flex-wrap justify-between items-center mx-auto bg-blue">
-        <a href="#" className="flex">
+        <a href="#" className="flex" onClick={homeClick}>
           <span className="self-center text-lg font-semibold whitespace-nowrap dark:text-white">Kahoot-But-Better</span>
         </a>
         {/* <button THIS IS THE HAMBURGER MENU
