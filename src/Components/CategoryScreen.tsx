@@ -25,7 +25,7 @@ export const CategoryScreen: React.FunctionComponent<ICategoryScreenProps> = ({
     { id: "boolean", name: "True / False" },
   ];
 
-  const [numberOfQuestions, setNumberOfQuestions] = useState(1);
+  const [numberOfQuestions, setNumberOfQuestions] = useState(5);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedDifficulty, setSelectedDifficulty] = useState("");
   const [selectedType, setSelectedType] = useState("");
@@ -42,7 +42,7 @@ export const CategoryScreen: React.FunctionComponent<ICategoryScreenProps> = ({
     setSelectedType(questionTypes[0].id);
     // console.log(typeof(numberOfQuestions))
     // console.log(numberOfQuestions);
-    console.log(selectedCategory);
+    // console.log(selectedCategory);
     // console.log(selectedDifficulty);
     // console.log(selectedType);
   }, []);
@@ -60,7 +60,7 @@ export const CategoryScreen: React.FunctionComponent<ICategoryScreenProps> = ({
       gameUrl += `&type=${selectedType}`;
     }
 
-    setGameQuestionsUrl(gameUrl);
+    setGameQuestionsUrl(`${gameUrl}&encode=base64`);
     handleGameScreenToggle();
   };
 

@@ -4,6 +4,7 @@ import { CategoryScreen } from "./Components/CategoryScreen";
 import { GameScreen } from "./Components/GameScreen";
 import Navbar from "./Components/Navbar";
 
+// TODO: create button component
 function App() {
   const [categoryScreenToggle, setCategoryScreenToggle] = useState<boolean>(false);
   const [gameScreenToggle, setGameScreenToggle] = useState<boolean>(false);
