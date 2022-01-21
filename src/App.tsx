@@ -69,7 +69,7 @@ function App() {
           )
         ) : (
           <div className="h-full flex items-center justify-center">
-            <button className="bg-blue-500 hover:bg-blue-200 rounded text-9xl p-6" onClick={handleCategoryScreenToggle}>
+            <button className="bg-blue-400 hover:bg-blue-200 rounded text-9xl p-6" onClick={handleCategoryScreenToggle}>
               Lets play
             </button>
           </div>

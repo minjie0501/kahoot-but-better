@@ -50,13 +50,13 @@ export const CategoryScreen: React.FunctionComponent<ICategoryScreenProps> = ({
   const handleGame = () => {
     let gameUrl = "https://opentdb.com/api.php";
     gameUrl += `?amount=${numberOfQuestions}`;
-    if(selectedCategory!=='null'){
+    if (selectedCategory !== "null") {
       gameUrl += `&category=${selectedCategory}`;
     }
-    if(selectedDifficulty !=='any'){
+    if (selectedDifficulty !== "any") {
       gameUrl += `&difficulty=${selectedDifficulty}`;
     }
-    if(selectedType !=='any'){
+    if (selectedType !== "any") {
       gameUrl += `&type=${selectedType}`;
     }
 
@@ -66,21 +66,25 @@ export const CategoryScreen: React.FunctionComponent<ICategoryScreenProps> = ({
 
   return (
     <>
-      <label htmlFor="Number of Questions" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">
-        Number of Questions
-      </label>
-      <input
-        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/ p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        type="number"
-        min="1"
-        step="1"
-        value={numberOfQuestions}
-        onChange={handleChange}
-      />
-      <CategoryScreenDropdown title="Select Category" options={categories} setter={setSelectedCategory} />
-      <CategoryScreenDropdown title="Select Difficulty" options={difficulties} setter={setSelectedDifficulty} />
-      <CategoryScreenDropdown title="Select Type" options={questionTypes} setter={setSelectedType} />
-      <button onClick={handleGame}>Start the quiz</button>
+      <div className="border-red-200 border-4 h-full flex flex-col items-center justify-center">
+        <label htmlFor="Number of Questions" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400 pt-2">
+          Number of Questions
+        </label>
+        <input
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/4 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          type="number"
+          min="1"
+          step="1"
+          value={numberOfQuestions}
+          onChange={handleChange}
+        />
+        <CategoryScreenDropdown title="Select Category" options={categories} setter={setSelectedCategory} />
+        <CategoryScreenDropdown title="Select Difficulty" options={difficulties} setter={setSelectedDifficulty} />
+        <CategoryScreenDropdown title="Select Type" options={questionTypes} setter={setSelectedType} />
+        <button className="bg-blue-400 hover:bg-blue-300 rounded text-lg p-2 w-1/4 mt-8" onClick={handleGame}>
+          Start the quiz
+        </button>
+      </div>
     </>
   );
 };

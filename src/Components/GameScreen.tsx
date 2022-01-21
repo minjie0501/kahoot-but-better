@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Buffer } from "buffer";
 import { ResultPage } from "./ResultPage";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
+import arrayShuffle from 'array-shuffle';
 
 interface IQuestionData {
   category: string;
@@ -20,9 +21,6 @@ const convertFromBase64 = (text: string) => {
   return Buffer.from(text, "base64").toString("utf8");
 };
 
-// TODO: randomize questions so the correct one is not always at the same place
-// TODO: showResult make the correct one green and the rest red
-
 export function GameScreen({ gameData }: Props) {
   const [currentQuestionId, setCurrentQuestionId] = useState(0);
   const [currentQuestionData, setCurrentQuestionData] = useState<IQuestionData>(gameData[currentQuestionId]);
@@ -37,12 +35,13 @@ export function GameScreen({ gameData }: Props) {
     currentQuestionData.incorrect_answers.forEach((a) => {
       setPossibleAnswers((prevArrState) => [...prevArrState, a]);
     });
+    setPossibleAnswers(prev => arrayShuffle(prev))
     setPossibleAnswersLoaded(true);
     setCurrentQuestionId((prevCurrentQuestionId) => prevCurrentQuestionId + 1);
   }, [currentQuestionData]);
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
-    if ((e.target as HTMLButtonElement).value === convertFromBase64(currentQuestionData.correct_answer)) {
+    if ((e.target as HTMLButtonElement).value === convertFromBase64(currentQuestionData.correct_answer ) && !showResult) {
       setCorrectAnswers(correctAnswers + 1);
     }
     setShowResult(true);
