@@ -4,10 +4,14 @@ import { CategoryScreenDropdown } from "./CategoryScreenDropdown";
 interface ICategoryScreenProps {
   categories: Array<any>;
   handleGameScreenToggle: () => void;
-  setGameQuestionsUrl: (url:string) => void;
+  setGameQuestionsUrl: (url: string) => void;
 }
 
-export const CategoryScreen: React.FunctionComponent<ICategoryScreenProps> = ({ categories, handleGameScreenToggle,setGameQuestionsUrl }) => {
+export const CategoryScreen: React.FunctionComponent<ICategoryScreenProps> = ({
+  categories,
+  handleGameScreenToggle,
+  setGameQuestionsUrl,
+}) => {
   // NOTE: couldn't find API endpoint for getting the difficulties and the types so I just hard-coded them for now
   const difficulties: Array<any> = [
     { id: "any", name: "Any Difficulty" },
@@ -21,29 +25,44 @@ export const CategoryScreen: React.FunctionComponent<ICategoryScreenProps> = ({ 
     { id: "boolean", name: "True / False" },
   ];
 
-  const [numberOfQuestions, setNumberOfQuestions] = useState("0");
+  const [numberOfQuestions, setNumberOfQuestions] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedDifficulty, setSelectedDifficulty] = useState("");
   const [selectedType, setSelectedType] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setNumberOfQuestions(e.target.value);
+    if (parseInt(e.target.value) < 1) setNumberOfQuestions(1);
+    else if (parseInt(e.target.value) > 50) setNumberOfQuestions(50);
+    else setNumberOfQuestions(parseInt(e.target.value));
   };
 
   useEffect(() => {
-    setSelectedCategory(categories[0].id)
-    setSelectedDifficulty(difficulties[0].id)
-    setSelectedType(questionTypes[0].id)
+    setSelectedCategory(categories[0].id);
+    setSelectedDifficulty(difficulties[0].id);
+    setSelectedType(questionTypes[0].id);
+    // console.log(typeof(numberOfQuestions))
+    // console.log(numberOfQuestions);
     console.log(selectedCategory);
-    console.log(numberOfQuestions);
-    console.log(selectedDifficulty);
-    console.log(selectedType);
-  }, [selectedCategory]);
+    // console.log(selectedDifficulty);
+    // console.log(selectedType);
+  }, []);
 
-  const handleGame = () =>{
-    setGameQuestionsUrl("https://opentdb.com/api.php?amount=10&difficulty=easy&encode=base64")
-    handleGameScreenToggle()
-  }
+  const handleGame = () => {
+    let gameUrl = "https://opentdb.com/api.php";
+    gameUrl += `?amount=${numberOfQuestions}`;
+    if(selectedCategory!=='null'){
+      gameUrl += `&category=${selectedCategory}`;
+    }
+    if(selectedDifficulty !=='any'){
+      gameUrl += `&difficulty=${selectedDifficulty}`;
+    }
+    if(selectedType !=='any'){
+      gameUrl += `&type=${selectedType}`;
+    }
+
+    setGameQuestionsUrl(gameUrl);
+    handleGameScreenToggle();
+  };
 
   return (
     <>
@@ -59,8 +78,8 @@ export const CategoryScreen: React.FunctionComponent<ICategoryScreenProps> = ({ 
         onChange={handleChange}
       />
       <CategoryScreenDropdown title="Select Category" options={categories} setter={setSelectedCategory} />
-      <CategoryScreenDropdown title="Select Difficulty" options={questionTypes} setter={setSelectedDifficulty} />
-      <CategoryScreenDropdown title="Select Type" options={difficulties} setter={setSelectedType} />
+      <CategoryScreenDropdown title="Select Difficulty" options={difficulties} setter={setSelectedDifficulty} />
+      <CategoryScreenDropdown title="Select Type" options={questionTypes} setter={setSelectedType} />
       <button onClick={handleGame}>Start the quiz</button>
     </>
   );

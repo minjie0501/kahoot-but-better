@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useEffect } from "react";
 
 interface Props {
-    gameQuestionsUrl:string;
-};
+  gameData: Array<any>;
+}
 
-export function GameScreen({gameQuestionsUrl}: Props) {
-  return <div>
-      <p>{gameQuestionsUrl}</p>
-      Questions here
-  </div>;
+export function GameScreen({ gameData }: Props) {
+  useEffect(() => {
+    console.log(gameData);
+  }, []);
+
+  return <h1>asd</h1>;
 }
