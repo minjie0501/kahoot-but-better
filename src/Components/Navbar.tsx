@@ -34,7 +34,7 @@ const Navbar: React.FunctionComponent<Props> = ({homeClick}) => {
             ></path>
           </svg>
         </button> */}
-        <div className="hidden w-full md:block md:w-auto" id="mobile-menu">
+        {/* <div className="hidden w-full md:block md:w-auto" id="mobile-menu">
           <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
             <li>
               <a
@@ -54,7 +54,7 @@ const Navbar: React.FunctionComponent<Props> = ({homeClick}) => {
               </a>
             </li>
           </ul>
-        </div>
+        </div> */}
       </div>
     </nav>
   );
