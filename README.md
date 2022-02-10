@@ -9,6 +9,6 @@ This exercise was part of the BeCode coding bootcamp. The goal was to create a q
 - [x] Score
 
 ## Extras
-- [] Make it mobile friendly
-- [] Deploy it online
-- [] Make it multiplayer with socket.io
+- [ ] Make it mobile friendly
+- [ ] Deploy it online
+- [ ] Make it multiplayer with socket.io
